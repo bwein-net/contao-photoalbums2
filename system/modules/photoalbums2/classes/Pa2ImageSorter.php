@@ -72,7 +72,7 @@ class Pa2ImageSorter extends \Controller
             $arrUuids = $this->arrCustomIds;
         }
 
-        $objImageSorter = new \ImageSorter($arrUuids);
+        $objImageSorter = new \ImageSorter($arrUuids, \Contao\Config::get('validImageTypes'));
         $objImageSorter->sortImagesBy($strSortKey, $strSortDirection);
         $arrUuids = $objImageSorter->getImageUuids();
 
