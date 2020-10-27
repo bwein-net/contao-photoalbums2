@@ -118,19 +118,12 @@ class Pa2AlbumViewParser extends \Pa2ViewParser
             return;
         }
 
-        // Import
-        $this->import('Session');
-
         // Define vars
         global $objPage;
         $arrItems = array();
         $objAlbums = $this->objAlbums;
         $total = $objAlbums->count();
         $i = 0;
-
-        // Set page session vars to generate backlink in detail page
-        $this->Session->set('pa2PageNumber_'.$this->Template->id, (\Input::get('page') ? \Input::get('page') : 1));
-        $this->Session->set('pa2PageId_'.$this->Template->id, $objPage->id);
 
         if ($objAlbums !== null) {
             while ($objAlbums->next()) {
