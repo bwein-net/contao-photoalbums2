@@ -304,43 +304,7 @@ class Pa2ImageViewParser extends \Pa2ViewParser
      */
     protected function generateBacklink()
     {
-        if (TL_MODE != 'FE' || $this->Template->pa2type == 'CE') {
-            return;
-        }
-
-        global $objPage;
-
-        // Import
-        $this->Import('Session');
-
-        // Get session vars
-        $intPageNumber = $this->Session->get('pa2PageNumber_' . $this->Template->id);
-        $intPageId = $this->Session->get('pa2PageId_' . $this->Template->id);
-
-        // Set backlink via overview page id
-        if (is_numeric($this->Template->pa2OverviewPage) && $this->Template->pa2OverviewPage > 0) {
-            $intPageId = $this->Template->pa2OverviewPage;
-        }
-
-        // Check and correct session vars
-        $intPageNumber = (is_numeric($intPageNumber) ? $intPageNumber : 1);
-        $intPageId = (is_numeric($intPageId) ? $intPageId : $objPage->id);
-
-        // Get page object by id
-        $objPageDetails = \PageModel::findByPk($intPageId);
-
-        if ($objPageDetails !== null) {
-            $objPageDetails = $this->getPageDetails($objPageDetails->id);
-
-            // Set template vars
-            $referer = $this->generateFrontendUrl(
-                $objPageDetails->row(),
-                '',
-                $objPageDetails->language
-            );
-            $referer .= ($intPageNumber > 1 ? '?page=' . $intPageNumber : '');
-            $this->Template->referer = $referer;
-            $this->Template->back = $GLOBALS['TL_LANG']['PA2']['goBack'];
-        }
+        $this->Template->referer = 'javascript:history.go(-1)';
+        $this->Template->back = $GLOBALS['TL_LANG']['PA2']['goBack'];
     }
 }
