@@ -98,7 +98,7 @@ class ModulePhotoalbums2 extends \Module
         $this->pa2DetailPage = ($this->pa2Mode == 'pa2_with_detail_page') ? $this->pa2DetailPage : '';
 
         // Set the item from the auto_item parameter
-        if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item'])) {
+        if ($this->type !== 'photoalbums2list' && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item'])) {
             \Input::setGet('album', \Input::get('auto_item'));
         }
 
